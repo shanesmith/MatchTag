@@ -90,11 +90,13 @@ fu! s:HighlightTagAtPosition(position)
     endif
 
     let [m_lnum, m_col] = a:position
-    exe '2match MatchParen /\(\%' . m_lnum . 'l\%' . m_col .  'c<\zs.\{-}\ze[\n >]\)\|'
+    exe '2match MatchTag /\(\%' . m_lnum . 'l\%' . m_col .  'c<\zs.\{-}\ze[\n >]\)\|'
                 \ .'\(\%' . line('.') . 'l\%' . col('.') .  'c<\zs.\{-}\ze[\n >]\)\|'
                 \ .'\(\%' . line('.') . 'l<\zs[^<> ]*\%' . col('.') . 'c.\{-}\ze[\n >]\)\|'
                 \ .'\(\%' . line('.') . 'l<\zs[^<>]\{-}\ze\s[^<>]*\%' . col('.') . 'c.\{-}[\n>]\)/'
     let w:tag_hl_on = 1
 endfu
+
+highlight default link MatchTag MatchParen
 
 " vim: set ts=8 sts=4 sw=4 expandtab :
